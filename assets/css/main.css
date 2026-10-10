@@ -10,18 +10,20 @@
 	--glow: rgba(124, 156, 255, 0.18);
 	--radius: 14px;
 	--maxw: 1120px;
+	--shadow: none;
 	--font: "Inter", system-ui, -apple-system, sans-serif;
 	--mono: "JetBrains Mono", ui-monospace, monospace;
 	color-scheme: dark;
 }
 
 [data-theme="light"] {
-	--bg: #f7f8fa;
-	--bg-2: #eef0f4;
+	--bg: #eef1f5;
+	--bg-2: #e3e7ee;
 	--surface: #ffffff;
-	--border: #e1e4ea;
+	--border: #cfd6e0;
 	--text: #14161c;
-	--muted: #5d6475;
+	--muted: #4f5668;
+	--shadow: 0 1px 2px rgba(16, 24, 40, .06), 0 4px 16px -6px rgba(16, 24, 40, .12);
 	--accent: #3b5bdb;
 	--accent-2: #0c8f84;
 	--glow: rgba(59, 91, 219, 0.12);
@@ -348,3 +350,21 @@ h1, h2, h3 { line-height: 1.15; letter-spacing: -0.02em; margin: 0 0 .5em; }
 .contrib__legend span:first-child { margin-right: auto; }
 .contrib__legend i { width: 10px; height: 10px; border-radius: 2px; }
 .l0 { background: var(--c0); } .l1 { background: var(--c1); } .l2 { background: var(--c2); } .l3 { background: var(--c3); } .l4 { background: var(--c4); }
+
+/* light mode: give surfaces depth and sections clear edges */
+.card, .photo, .output, .chips li, .loaded, .icon-btn, .btn--ghost { box-shadow: var(--shadow); }
+.project:hover { box-shadow: var(--shadow), 0 10px 30px -12px var(--glow); }
+[data-theme="light"] body { background-image:
+	linear-gradient(rgba(16, 24, 40, .045) 1px, transparent 1px),
+	linear-gradient(90deg, rgba(16, 24, 40, .045) 1px, transparent 1px); }
+[data-theme="light"] body::before { background-color: color-mix(in srgb, var(--bg) 70%, transparent); }
+[data-theme="light"] main > .section:nth-of-type(odd) {
+	background: color-mix(in srgb, var(--bg-2) 80%, transparent);
+	border-top: 1px solid var(--border);
+	border-bottom: 1px solid var(--border);
+}
+[data-theme="light"] .nav { background: color-mix(in srgb, var(--surface) 88%, transparent); box-shadow: 0 1px 0 var(--border); }
+[data-theme="light"] .terminal { background: #1b1f27; color: #e6e8ee; border-color: #1b1f27; }
+[data-theme="light"] .snake-play { background: color-mix(in srgb, var(--surface) 55%, transparent); }
+[data-theme="light"] .snake-play__btn { color: #fff; }
+[data-theme="light"] .timeline li::before { background: var(--surface); }
