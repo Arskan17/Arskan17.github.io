@@ -168,20 +168,22 @@ h1, h2, h3 { line-height: 1.15; letter-spacing: -0.02em; margin: 0 0 .5em; }
 .timeline h3 { font-size: 1.15rem; margin-bottom: 4px; }
 .timeline p { margin: 0; color: var(--muted); max-width: 70ch; }
 
-.skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 22px 40px; }
-.skill { display: grid; grid-template-columns: 1fr auto; gap: 8px; font-size: 15px; }
-.skill .mono { color: var(--muted); font-size: 13px; }
-.skill i {
-	grid-column: 1 / -1; height: 6px; border-radius: 6px;
-	background: var(--bg-2); position: relative; overflow: hidden;
+.skillset { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+.skillset h3 { font-size: 13px; font-weight: 500; color: var(--accent-2); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 14px; }
+.chips { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.chips li {
+	font-size: 14px; padding: 5px 12px; border-radius: 8px;
+	background: var(--bg-2); border: 1px solid var(--border);
+	transition: border-color .2s, color .2s;
 }
-.skill i::after {
-	content: ""; position: absolute; inset: 0;
-	width: 0; border-radius: inherit;
-	background: linear-gradient(90deg, var(--accent), var(--accent-2));
-	transition: width 1.2s cubic-bezier(.2,.8,.2,1);
-}
-.skills.is-visible .skill i::after { width: var(--v); }
+.chips li:hover { border-color: var(--accent); color: var(--accent); }
+.timeline ul { margin: 6px 0 0; padding-left: 18px; color: var(--muted); max-width: 75ch; display: grid; gap: 4px; }
+.timeline ul strong { color: var(--text); font-weight: 500; }
+.timeline h3 a { color: inherit; border-bottom: 1px solid var(--accent); }
+.timeline h3 a:hover { text-decoration: none; color: var(--accent); }
+.timeline__now::before { background: var(--accent-2) !important; border-color: var(--accent-2) !important; box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent-2) 25%, transparent); }
+.offclock { font-size: .95rem !important; }
+.offclock .mono { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--accent-2); margin-bottom: 2px; }
 
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
 .project { color: var(--text); transition: transform .2s, border-color .2s; }
