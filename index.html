@@ -24,6 +24,7 @@
 				<a href="#skills">Skills</a>
 				<a href="#projects">Projects</a>
 				<a href="#posts">Photography</a>
+				<a href="#play">Play</a>
 				<a href="#contact">Contact</a>
 			</nav>
 			<div class="nav__actions">
@@ -48,6 +49,7 @@
 					<div class="hero__cta">
 						<a class="btn btn--primary" href="#projects">See my work</a>
 						<a class="btn btn--ghost" href="https://github.com/Arskan17" target="_blank" rel="noopener">GitHub ↗</a>
+						<a class="btn btn--glow" href="#edgeparse">Try EdgeParse ↓</a>
 					</div>
 				</div>
 				<div class="hero__portrait reveal">
@@ -138,7 +140,7 @@ foss · p2p web · wasm · photography</pre>
 				<article class="card demo reveal" id="edgeparse">
 					<div class="demo__head">
 						<div>
-							<span class="tag mono">Rust → WebAssembly · runs locally</span>
+							<span class="tag mono">Rust → WebAssembly · runs locally</span> <span class="live mono"><i></i>LIVE · try it</span>
 							<h3>EdgeParse — PDF to structured data, in your browser</h3>
 							<p class="muted">Drop a PDF and the <a href="https://github.com/Arskan17/EdgeParse" target="_blank" rel="noopener">EdgeParse</a> engine, compiled to WASM, extracts Markdown, JSON (with bounding boxes), HTML or plain text. Nothing is uploaded: the file never leaves your machine.</p>
 						</div>
@@ -202,9 +204,30 @@ foss · p2p web · wasm · photography</pre>
 			</div>
 		</section>
 
+		<section id="play" class="section">
+			<div class="container">
+				<h2 class="section__title reveal"><span class="mono">06.</span> Play</h2>
+				<p class="muted reveal">My commit history is secretly a snake game. Eat the commits, don't bite yourself.</p>
+				<div class="contrib reveal" id="contrib">
+					<div class="contrib__bar mono">
+						<span id="snake-label">contributions in the last year</span>
+						<span id="snake-score"></span>
+					</div>
+					<div class="contrib__stage">
+						<canvas id="snake" aria-label="Contribution graph snake game" role="img"></canvas>
+						<button class="snake-play" id="snake-play" type="button">
+							<span class="snake-play__btn" id="snake-play-text">▶ Play</span>
+							<span class="snake-play__hint mono">arrows / wasd / swipe</span>
+						</button>
+					</div>
+					<div class="contrib__legend mono"><span id="snake-hint">less</span><i class="l0"></i><i class="l1"></i><i class="l2"></i><i class="l3"></i><i class="l4"></i><span>more</span></div>
+				</div>
+			</div>
+		</section>
+
 		<section id="contact" class="section">
 			<div class="container contact reveal">
-				<h2 class="section__title"><span class="mono">06.</span> Get in touch</h2>
+				<h2 class="section__title"><span class="mono">07.</span> Get in touch</h2>
 				<p class="lead">Open to internships, working-student roles and interesting open-source work.</p>
 				<div class="hero__cta">
 					<a class="btn btn--primary" href="mailto:Arsene17kankeu@gmail.com">Say hello</a>
@@ -218,14 +241,6 @@ foss · p2p web · wasm · photography</pre>
 	<footer class="footer">
 		<div class="container">
 			<!-- footer-extras -->
-			<div class="contrib" id="contrib">
-				<div class="contrib__bar mono">
-					<span id="snake-label">contributions in the last year</span>
-					<span id="snake-score"></span>
-				</div>
-				<canvas id="snake" aria-label="Contribution graph" role="img"></canvas>
-				<div class="contrib__legend mono"><span id="snake-hint">less</span><i class="l0"></i><i class="l1"></i><i class="l2"></i><i class="l3"></i><i class="l4"></i><span>more</span></div>
-			</div>
 			<p class="mono muted">© <span id="year"></span> Arsène Ulrich Mugneghe Kankeu · built by hand, no frameworks</p>
 		</div>
 	</footer>

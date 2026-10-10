@@ -66,6 +66,7 @@ function pick(file) {
 		return;
 	}
 	currentFile = file;
+	drop.classList.add('has-file');
 	$('ep-filename').textContent = `${file.name} · ${(file.size / 1024).toFixed(0)} KB`;
 	run();
 }

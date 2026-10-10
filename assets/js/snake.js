@@ -1,12 +1,14 @@
 // Easter egg: the footer contribution graph turns into Snake.
 // Trigger: click the graph, type "snake", or enter the Konami code.
 (() => {
-	const COLS = 53, ROWS = 7, CELL = 11, GAP = 3, STEP = CELL + GAP;
+	const COLS = 53, ROWS = 7, CELL = 18, GAP = 4, STEP = CELL + GAP;
 	const canvas = document.getElementById('snake');
 	const wrap = document.getElementById('contrib');
 	const label = document.getElementById('snake-label');
 	const scoreEl = document.getElementById('snake-score');
 	const hint = document.getElementById('snake-hint');
+	const playBtn = document.getElementById('snake-play');
+	const playText = document.getElementById('snake-play-text');
 	const ctx = canvas.getContext('2d');
 
 	const dpr = window.devicePixelRatio || 1;
@@ -34,7 +36,7 @@
 	function cellRect(x, y, fill) {
 		ctx.fillStyle = fill;
 		ctx.beginPath();
-		ctx.roundRect(x * STEP, y * STEP, CELL, CELL, 2);
+		ctx.roundRect(x * STEP, y * STEP, CELL, CELL, 3);
 		ctx.fill();
 	}
 
@@ -68,7 +70,8 @@
 		updateScore();
 		clearInterval(timer);
 		timer = setInterval(tick, 110);
-		canvas.focus();
+		canvas.focus({ preventScroll: true });
+		wrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
 	}
 
 	function stop(final) {
@@ -77,6 +80,7 @@
 		over = final;
 		wrap.classList.remove('playing');
 		if (final) {
+			playText.textContent = `↻ Play again · score ${score}`;
 			if (score > best) {
 				best = score;
 				try { localStorage.setItem('snake-best', best); } catch (e) {}
@@ -84,6 +88,7 @@
 			label.textContent = `game over — ${score} contributions · click to retry`;
 		} else {
 			snake = null;
+			playText.textContent = '▶ Play';
 			label.textContent = `${total.toLocaleString()} contributions in the last year`;
 		}
 		hint.textContent = 'less';
@@ -139,13 +144,13 @@
 		const typed = buffer.slice(-5).join('');
 		if (typed === 'snake' || buffer.join() === KONAMI.join()) {
 			buffer = [];
-			wrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
 			start();
 		}
 	});
 
 	canvas.tabIndex = 0;
 	canvas.addEventListener('click', () => { if (!playing) start(); });
+	playBtn.addEventListener('click', start);
 
 	let touch = null;
 	canvas.addEventListener('touchstart', (e) => { touch = e.touches[0]; }, { passive: true });
