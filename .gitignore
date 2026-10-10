@@ -128,3 +128,8 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# Local agent tooling (impeccable skill install)
+.agents/
+.claude/
+skills-lock.json
