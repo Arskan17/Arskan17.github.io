@@ -1,0 +1,622 @@
+{
+  "picture": {
+    "hidden": false,
+    "fit": "cover",
+    "url": "",
+    "size": 80,
+    "rotation": 0,
+    "aspectRatio": 1,
+    "borderRadius": 0,
+    "borderColor": "rgba(0, 0, 0, 0.5)",
+    "borderWidth": 0,
+    "shadowColor": "rgba(0, 0, 0, 0.5)",
+    "shadowWidth": 0
+  },
+  "basics": {
+    "name": "Ulrich Kankeu ",
+    "headline": "",
+    "email": "Kankeujobs@gmail.com",
+    "phone": "",
+    "location": "",
+    "website": {
+      "url": "",
+      "label": ""
+    },
+    "customFields": [
+      {
+        "id": "019d538c-2168-750d-ad7f-42ea178a563a",
+        "icon": "github-logo",
+        "text": "https://github.com/arskan17 ",
+        "link": "https://github.com/Arskan17 "
+      },
+      {
+        "id": "019d5382-5f64-74ef-8200-bd9c5ec74b97",
+        "icon": "linkedin-logo",
+        "text": "www.linkedin.com/in/arskan17",
+        "link": "www.linkedin.com/in/arskan17"
+      }
+    ]
+  },
+  "summary": {
+    "title": "",
+    "icon": "",
+    "columns": 1,
+    "hidden": true,
+    "showHeading": true,
+    "keepTogether": false,
+    "startOnNewPage": false,
+    "content": "<p>I’m an AI Solutions Engineer, been working at a small AI startup for the past year and a half.</p><p>Although I primarily worked on solutions surrounding ML pipelines, I’m very adaptable.</p>"
+  },
+  "sections": {
+    "profiles": {
+      "title": "",
+      "icon": "",
+      "columns": 1,
+      "hidden": false,
+      "showHeading": true,
+      "keepTogether": false,
+      "startOnNewPage": false,
+      "items": []
+    },
+    "experience": {
+      "title": "",
+      "icon": "",
+      "columns": 1,
+      "hidden": false,
+      "showHeading": true,
+      "keepTogether": false,
+      "startOnNewPage": false,
+      "items": [
+        {
+          "id": "01a1251e-73af-73f9-9f2d-0f194524b752",
+          "hidden": false,
+          "company": "Stellar Work GmbH",
+          "position": "",
+          "location": "Nuremberg",
+          "period": "",
+          "dates": {
+            "start": null,
+            "end": null,
+            "present": false
+          },
+          "website": {
+            "url": "https://www.stellarwork.com/",
+            "label": "",
+            "inlineLink": true
+          },
+          "description": "",
+          "roles": [
+            {
+              "id": "01a12521-2523-7611-a9c1-ccf752e357ed",
+              "position": "AI Forward Deployed Engineer (FDE)",
+              "period": "08/2026 – Present",
+              "dates": {
+                "start": "2026-08",
+                "end": null,
+                "present": true
+              },
+              "description": "<ul><li><p data-resume-whitespace=\"preserve\">Enabling dev teams into becoming agentic.</p></li><li><p data-resume-whitespace=\"preserve\">Contributing to the development of graph knowledge stores in agentic workflows. </p></li><li><p data-resume-whitespace=\"preserve\">Creating AI Workshops for the  technology branche of a banking institution.</p></li></ul><p data-resume-whitespace=\"preserve\"></p><p></p>"
+            }
+          ]
+        },
+        {
+          "id": "019d52d2-94bc-75bc-ac5a-9c05ddd3ee5d",
+          "hidden": false,
+          "company": "Embraceable Technology GmbH",
+          "position": "",
+          "location": "Karlsruhe, DE",
+          "period": "",
+          "dates": {
+            "start": null,
+            "end": null,
+            "present": false
+          },
+          "website": {
+            "url": "https://embraceable.ai",
+            "label": "",
+            "inlineLink": true
+          },
+          "description": "",
+          "roles": [
+            {
+              "id": "019d52d3-8ab4-7778-9316-ad53fd094d18",
+              "position": "AI- & Software Engineer",
+              "period": "09/2024 – 06/2026",
+              "dates": {
+                "start": "2024-09",
+                "end": "2026-06",
+                "present": false
+              },
+              "description": "<ul><li><p data-resume-whitespace=\"preserve\"><strong>RAG &amp; Ingestion Optimization:</strong> Reengineered document ingestion pipelines (structured extraction, anonymization, embedding) and fine-tuned context-pruning models, significantly boosting retrieval quality and relevance.</p></li><li><p data-resume-whitespace=\"preserve\"><strong>Workflow Automation &amp; Agent Prototyping:</strong> Built custom n8n nodes, AI automation agents, and internal API integrations to accelerate rapid prototyping and automate client use cases using function calling.</p></li><li><p data-resume-whitespace=\"preserve\"><strong>SDK &amp; Platform Tooling:</strong> Co-developed the platform’s Python SDK and automation scripts, streamlining platform accessibility and developer integration.</p></li></ul><p></p>"
+            }
+          ]
+        },
+        {
+          "id": "019d52d5-d754-73cc-8825-100758cf4060",
+          "hidden": false,
+          "company": "DFKI",
+          "position": "",
+          "location": "Kaiserslautern, DE",
+          "period": "",
+          "dates": {
+            "start": null,
+            "end": null,
+            "present": false
+          },
+          "website": {
+            "url": "https://www.dfki.de/web",
+            "label": "",
+            "inlineLink": true
+          },
+          "description": "<p></p>",
+          "roles": [
+            {
+              "id": "019d530d-5891-760c-bcfb-69d292103af9",
+              "position": "HiWi (Research assistant)",
+              "period": "10/2023 – 09/2024",
+              "dates": {
+                "start": "2023-10",
+                "end": "2024-09",
+                "present": false
+              },
+              "description": "<ul><li><p>Engineered a Neo4j graph database representation for the in-house Industry 4.0 Asset Administration Shell (AAS).</p></li><li><p>Configured cluster backups using the OpenShift API for Data Protection (OADP) to secure data integrity.</p></li><li><p>Migrated various in-house projects from Docker to Red Hat OpenShift, in order to streamline testing.</p></li><li><p>Deployed various coding projects from GitLab to our OpenShift cluster, so they can be used in other projects.</p></li></ul><p></p>"
+            }
+          ]
+        }
+      ]
+    },
+    "education": {
+      "title": "",
+      "icon": "",
+      "columns": 1,
+      "hidden": false,
+      "showHeading": true,
+      "keepTogether": false,
+      "startOnNewPage": false,
+      "items": [
+        {
+          "id": "019d52d8-983d-75e8-89c5-f6a0f693a236",
+          "hidden": false,
+          "school": "Rheinland-Pfälzische Technische Universität (RPTU)",
+          "degree": "Computer Science, B.Sc.",
+          "area": "",
+          "grade": "2025",
+          "location": "",
+          "period": "",
+          "dates": {
+            "start": null,
+            "end": null,
+            "present": false
+          },
+          "website": {
+            "url": "https://rptu.de/",
+            "label": "",
+            "inlineLink": true
+          },
+          "description": "<p><a target=\"_blank\" rel=\"noopener nofollow\" href=\"https://github.com/Arskan17/Efficient-algorithms-for-checking-equivalence-of-compressed-strings\">Bachelor's thesis:</a> <span style=\"color: rgb(21, 93, 252);\"><em>Efficient algorithms for checking equivalence of compressed strings</em></span></p><p>We proposed a polynomial-time algorithm for comparing compressed strings, that leveraged the concept of <em>Context-free Grammars (CFGs) </em>in formal language and computation theory<em>. </em>We skip the whole decompress-and-compress step entirely, checking for equivalence in their compressed representations.</p><p></p>"
+        }
+      ]
+    },
+    "projects": {
+      "title": "",
+      "icon": "",
+      "columns": 1,
+      "hidden": false,
+      "showHeading": true,
+      "keepTogether": false,
+      "startOnNewPage": false,
+      "items": [
+        {
+          "id": "019d8fda-0f2a-7196-a69d-35f9eb9ed72d",
+          "hidden": false,
+          "name": "Agregore Browser",
+          "period": "",
+          "dates": {
+            "start": null,
+            "end": null,
+            "present": false
+          },
+          "website": {
+            "url": "https://github.com/Arskan17/agregore-browser",
+            "label": "",
+            "inlineLink": true
+          },
+          "description": "<p>The Agregore browser is a futuristic, free, and open-source (FOSS) web browser for the decentralized web. It supports state-of-the-art distributed internet protocols such as IPFS and BitTorrent.</p><p></p>"
+        }
+      ]
+    },
+    "skills": {
+      "title": "",
+      "icon": "",
+      "columns": 1,
+      "hidden": false,
+      "showHeading": true,
+      "keepTogether": false,
+      "startOnNewPage": false,
+      "items": [
+        {
+          "id": "019d52e8-8cdf-76bf-9889-fc2e5e9a68e8",
+          "hidden": false,
+          "icon": "code",
+          "iconColor": "",
+          "name": "Python, Java, TypeScript, C, SQL",
+          "proficiency": "",
+          "level": 0,
+          "keywords": []
+        },
+        {
+          "id": "019f83c2-00e5-71cf-b586-a982d97f8dff",
+          "hidden": false,
+          "icon": "tree-structure",
+          "iconColor": "",
+          "name": "Docker, Kubernetes, Linux, Git, gRPC, REST, MCP",
+          "proficiency": "",
+          "level": 0,
+          "keywords": []
+        },
+        {
+          "id": "019f83c2-bafc-763a-a01d-6c72764853dc",
+          "hidden": false,
+          "icon": "brain",
+          "iconColor": "",
+          "name": "RAG, HuggingFace, Langchain,  n8n",
+          "proficiency": "",
+          "level": 0,
+          "keywords": []
+        }
+      ],
+      "keywordLayout": "inline",
+      "layout": "default"
+    },
+    "languages": {
+      "title": "",
+      "icon": "",
+      "columns": 6,
+      "hidden": true,
+      "showHeading": true,
+      "keepTogether": false,
+      "startOnNewPage": false,
+      "items": [
+        {
+          "id": "019d52d9-f39c-74e5-94e5-aeeccfc27ebd",
+          "hidden": false,
+          "language": "German",
+          "fluency": "Fluent",
+          "level": 0
+        },
+        {
+          "id": "019d52da-495b-7717-a859-dd9a8bc731de",
+          "hidden": false,
+          "language": "English",
+          "fluency": "Native",
+          "level": 0
+        },
+        {
+          "id": "019d52da-7e1d-717c-9816-d78ef6a958d4",
+          "hidden": false,
+          "language": "French",
+          "fluency": "Native",
+          "level": 0
+        }
+      ]
+    },
+    "interests": {
+      "title": "",
+      "icon": "",
+      "columns": 1,
+      "hidden": true,
+      "showHeading": true,
+      "keepTogether": false,
+      "startOnNewPage": false,
+      "items": [
+        {
+          "id": "019d52da-b66c-712b-9d00-d67073d8f9b3",
+          "hidden": false,
+          "icon": "lightbulb",
+          "iconColor": "",
+          "name": "Badminton, running, PC-building, prototyping, cooking, puzzles.",
+          "keywords": []
+        }
+      ]
+    },
+    "awards": {
+      "title": "",
+      "icon": "",
+      "columns": 1,
+      "hidden": false,
+      "showHeading": true,
+      "keepTogether": false,
+      "startOnNewPage": false,
+      "items": []
+    },
+    "certifications": {
+      "title": "",
+      "icon": "",
+      "columns": 1,
+      "hidden": false,
+      "showHeading": true,
+      "keepTogether": false,
+      "startOnNewPage": false,
+      "items": []
+    },
+    "publications": {
+      "title": "",
+      "icon": "",
+      "columns": 1,
+      "hidden": false,
+      "showHeading": true,
+      "keepTogether": false,
+      "startOnNewPage": false,
+      "items": []
+    },
+    "volunteer": {
+      "title": "",
+      "icon": "",
+      "columns": 1,
+      "hidden": false,
+      "showHeading": true,
+      "keepTogether": false,
+      "startOnNewPage": false,
+      "items": []
+    },
+    "references": {
+      "title": "",
+      "icon": "",
+      "columns": 1,
+      "hidden": false,
+      "showHeading": true,
+      "keepTogether": false,
+      "startOnNewPage": false,
+      "items": [
+        {
+          "id": "019d52e6-20f6-74df-9106-f2a0a8c09ab5",
+          "hidden": true,
+          "name": "Dr.-Ing. Christian Gilcher",
+          "position": "CEO",
+          "website": {
+            "url": "https://embraceable.ai/",
+            "label": "",
+            "inlineLink": true
+          },
+          "phone": "+49-721-9861-7690",
+          "description": ""
+        }
+      ]
+    }
+  },
+  "customSections": [],
+  "metadata": {
+    "template": "onyx",
+    "layout": {
+      "sidebarWidth": 35,
+      "pages": [
+        {
+          "fullWidth": true,
+          "main": [
+            "profiles",
+            "summary",
+            "experience",
+            "projects",
+            "skills",
+            "education",
+            "volunteer",
+            "certifications",
+            "awards",
+            "languages",
+            "interests",
+            "references",
+            "publications"
+          ],
+          "sidebar": []
+        }
+      ]
+    },
+    "page": {
+      "gapX": 4,
+      "gapY": 6,
+      "marginX": 14,
+      "marginY": 12,
+      "format": "a4",
+      "locale": "en-US",
+      "dateFormat": "numeric",
+      "hideLinkUnderline": false,
+      "hideIcons": false,
+      "hideSectionIcons": true
+    },
+    "design": {
+      "level": {
+        "icon": "star",
+        "type": "circle"
+      },
+      "colors": {
+        "primary": "rgba(21, 93, 252, 1)",
+        "text": "rgba(0, 0, 0, 1)",
+        "background": "rgba(255, 255, 255, 1)"
+      }
+    },
+    "typography": {
+      "body": {
+        "fontFamily": "IBM Plex Sans",
+        "fontWeights": [
+          "400",
+          "600"
+        ],
+        "fontSize": 10,
+        "lineHeight": 1.4
+      },
+      "heading": {
+        "fontFamily": "IBM Plex Serif",
+        "fontWeights": [
+          "600"
+        ],
+        "fontSize": 18,
+        "lineHeight": 2
+      }
+    },
+    "notes": "",
+    "styleRules": [
+      {
+        "id": "style-global-heading",
+        "label": "All sections: Section heading",
+        "enabled": true,
+        "target": {
+          "scope": "global"
+        },
+        "slots": {
+          "heading": {
+            "color": "rgba(0, 0, 0, 1)",
+            "textDecorationColor": "rgba(0, 0, 0, 1)"
+          }
+        }
+      },
+      {
+        "id": "style-section-id-experience-text",
+        "label": "Experience: Primary text",
+        "enabled": true,
+        "target": {
+          "scope": "sectionId",
+          "sectionId": "experience"
+        },
+        "slots": {
+          "text": {
+            "color": "rgba(79, 57, 246, 1)"
+          }
+        }
+      },
+      {
+        "id": "style-section-id-projects-text",
+        "label": "Projects: Primary text",
+        "enabled": true,
+        "target": {
+          "scope": "sectionId",
+          "sectionId": "projects"
+        },
+        "slots": {
+          "text": {
+            "color": "rgba(21, 93, 252, 1)"
+          }
+        }
+      },
+      {
+        "id": "style-section-id-education-heading",
+        "label": "Education: Section heading",
+        "enabled": true,
+        "target": {
+          "scope": "sectionId",
+          "sectionId": "education"
+        },
+        "slots": {
+          "heading": {
+            "color": "rgba(0, 0, 0, 1)"
+          }
+        }
+      },
+      {
+        "id": "style-section-id-education-item",
+        "label": "Education: Item container",
+        "enabled": true,
+        "target": {
+          "scope": "sectionId",
+          "sectionId": "education"
+        },
+        "slots": {
+          "item": {
+            "color": "rgba(0, 0, 0, 1)"
+          }
+        }
+      },
+      {
+        "id": "style-section-id-education-text",
+        "label": "Education: Primary text",
+        "enabled": true,
+        "target": {
+          "scope": "sectionId",
+          "sectionId": "education"
+        },
+        "slots": {
+          "text": {
+            "color": "rgba(0, 0, 0, 1)",
+            "fontWeight": "600"
+          }
+        }
+      },
+      {
+        "id": "style-section-id-education-secondaryText",
+        "label": "Education: Secondary text",
+        "enabled": true,
+        "target": {
+          "scope": "sectionId",
+          "sectionId": "education"
+        },
+        "slots": {
+          "secondaryText": {
+            "color": "rgba(0, 0, 0, 1)"
+          }
+        }
+      },
+      {
+        "id": "style-section-id-education-richParagraph",
+        "label": "Education: Paragraph",
+        "enabled": true,
+        "target": {
+          "scope": "sectionId",
+          "sectionId": "education"
+        },
+        "slots": {
+          "richParagraph": {
+            "color": "rgba(0, 0, 0, 1)"
+          }
+        }
+      },
+      {
+        "id": "style-section-id-education-richList",
+        "label": "Education: List",
+        "enabled": true,
+        "target": {
+          "scope": "sectionId",
+          "sectionId": "education"
+        },
+        "slots": {
+          "richList": {
+            "color": "rgba(0, 0, 0, 1)"
+          }
+        }
+      },
+      {
+        "id": "style-section-id-education-link",
+        "label": "Education: Link",
+        "enabled": true,
+        "target": {
+          "scope": "sectionId",
+          "sectionId": "education"
+        },
+        "slots": {
+          "link": {
+            "color": "rgba(0, 0, 0, 1)"
+          }
+        }
+      },
+      {
+        "id": "style-section-id-education-level",
+        "label": "Education: Level indicator",
+        "enabled": true,
+        "target": {
+          "scope": "sectionId",
+          "sectionId": "education"
+        },
+        "slots": {
+          "level": {
+            "color": "rgba(0, 0, 0, 1)"
+          }
+        }
+      }
+    ],
+    "stylesheet": {
+      "mode": "semantic",
+      "source": {
+        "languageVersion": 1,
+        "text": "/* All sections: Section heading */\nsection > section-heading {\n\tcolor: #000000;\n\ttext-decoration-color: #000000;\n}\n\n/* Experience: Primary text */\nsection[id=\"experience\"] field:not([name=\"content\"]):not([name=\"description\"]):not([name=\"recipient\"]):not([name=\"keywords\"]) {\n\tcolor: #4f39f6;\n}\n\n/* Experience: Primary text: combined text host */\nsection[id=\"experience\"] combined-text {\n\tcolor: #4f39f6;\n}\n\n/* Experience: Primary text: Scizor Bold final color */\nresume[template=\"scizor\"] section[id=\"experience\"] field:not([name=\"content\"]):not([name=\"description\"]):not([name=\"recipient\"]):not([name=\"keywords\"])[role~=\"primary-text\"][name=\"company\"],\nresume[template=\"scizor\"] section[id=\"experience\"] field:not([name=\"content\"]):not([name=\"description\"]):not([name=\"recipient\"]):not([name=\"keywords\"])[role~=\"primary-text\"][name=\"school\"],\nresume[template=\"scizor\"] section[id=\"experience\"] field:not([name=\"content\"]):not([name=\"description\"]):not([name=\"recipient\"]):not([name=\"keywords\"])[role~=\"primary-text\"][name=\"name\"],\nresume[template=\"scizor\"] section[id=\"experience\"] field:not([name=\"content\"]):not([name=\"description\"]):not([name=\"recipient\"]):not([name=\"keywords\"])[role~=\"primary-text\"][name=\"language\"],\nresume[template=\"scizor\"] section[id=\"experience\"] field:not([name=\"content\"]):not([name=\"description\"]):not([name=\"recipient\"]):not([name=\"keywords\"])[role~=\"primary-text\"][name=\"network\"],\nresume[template=\"scizor\"] section[id=\"experience\"] field:not([name=\"content\"]):not([name=\"description\"]):not([name=\"recipient\"]):not([name=\"keywords\"])[role~=\"primary-text\"][name=\"organization\"],\nresume[template=\"scizor\"] section[id=\"experience\"] field:not([name=\"content\"]):not([name=\"description\"]):not([name=\"recipient\"]):not([name=\"keywords\"])[role~=\"primary-text\"][name=\"title\"] {\n\tcolor: #000000;\n}\n\n/* Projects: Primary text */\nsection[id=\"projects\"] field:not([name=\"content\"]):not([name=\"description\"]):not([name=\"recipient\"]):not([name=\"keywords\"]) {\n\tcolor: #155dfc;\n}\n\n/* Projects: Primary text: combined text host */\nsection[id=\"projects\"] combined-text {\n\tcolor: #155dfc;\n}\n\n/* Projects: Primary text: Scizor Bold final color */\nresume[template=\"scizor\"] section[id=\"projects\"] field:not([name=\"content\"]):not([name=\"description\"]):not([name=\"recipient\"]):not([name=\"keywords\"])[role~=\"primary-text\"][name=\"company\"],\nresume[template=\"scizor\"] section[id=\"projects\"] field:not([name=\"content\"]):not([name=\"description\"]):not([name=\"recipient\"]):not([name=\"keywords\"])[role~=\"primary-text\"][name=\"school\"],\nresume[template=\"scizor\"] section[id=\"projects\"] field:not([name=\"content\"]):not([name=\"description\"]):not([name=\"recipient\"]):not([name=\"keywords\"])[role~=\"primary-text\"][name=\"name\"],\nresume[template=\"scizor\"] section[id=\"projects\"] field:not([name=\"content\"]):not([name=\"description\"]):not([name=\"recipient\"]):not([name=\"keywords\"])[role~=\"primary-text\"][name=\"language\"],\nresume[template=\"scizor\"] section[id=\"projects\"] field:not([name=\"content\"]):not([name=\"description\"]):not([name=\"recipient\"]):not([name=\"keywords\"])[role~=\"primary-text\"][name=\"network\"],\nresume[template=\"scizor\"] section[id=\"projects\"] field:not([name=\"content\"]):not([name=\"description\"]):not([name=\"recipient\"]):not([name=\"keywords\"])[role~=\"primary-text\"][name=\"organization\"],\nresume[template=\"scizor\"] section[id=\"projects\"] field:not([name=\"content\"]):not([name=\"description\"]):not([name=\"recipient\"]):not([name=\"keywords\"])[role~=\"primary-text\"][name=\"title\"] {\n\tcolor: #000000;\n}\n\n/* Education: Section heading */\nsection[id=\"education\"] > section-heading {\n\tcolor: #000000;\n}\n\n/* Education: Item container */\nsection[id=\"education\"] > section-items > item {\n\tcolor: #000000;\n}\n\n/* Education: Primary text */\nsection[id=\"education\"] field:not([name=\"content\"]):not([name=\"description\"]):not([name=\"recipient\"]):not([name=\"keywords\"]) {\n\tcolor: #000000;\n}\n\n/* Education: Primary text */\nsection[id=\"education\"] field:not([name=\"content\"]):not([name=\"description\"]):not([name=\"recipient\"]):not([name=\"keywords\"]):not([role~=\"primary-text\"]),\nsection[id=\"education\"] item[role~=\"nested-role\"] > item-header > field[name=\"position\"] {\n\tfont-weight: 600;\n}\n\n/* Education: Primary text: combined text host */\nsection[id=\"education\"] combined-text {\n\tcolor: #000000;\n\tfont-weight: 600;\n}\n\n/* Education: Primary text: Scizor Bold final color */\nresume[template=\"scizor\"] section[id=\"education\"] field:not([name=\"content\"]):not([name=\"description\"]):not([name=\"recipient\"]):not([name=\"keywords\"])[role~=\"primary-text\"][name=\"company\"],\nresume[template=\"scizor\"] section[id=\"education\"] field:not([name=\"content\"]):not([name=\"description\"]):not([name=\"recipient\"]):not([name=\"keywords\"])[role~=\"primary-text\"][name=\"school\"],\nresume[template=\"scizor\"] section[id=\"education\"] field:not([name=\"content\"]):not([name=\"description\"]):not([name=\"recipient\"]):not([name=\"keywords\"])[role~=\"primary-text\"][name=\"name\"],\nresume[template=\"scizor\"] section[id=\"education\"] field:not([name=\"content\"]):not([name=\"description\"]):not([name=\"recipient\"]):not([name=\"keywords\"])[role~=\"primary-text\"][name=\"language\"],\nresume[template=\"scizor\"] section[id=\"education\"] field:not([name=\"content\"]):not([name=\"description\"]):not([name=\"recipient\"]):not([name=\"keywords\"])[role~=\"primary-text\"][name=\"network\"],\nresume[template=\"scizor\"] section[id=\"education\"] field:not([name=\"content\"]):not([name=\"description\"]):not([name=\"recipient\"]):not([name=\"keywords\"])[role~=\"primary-text\"][name=\"organization\"],\nresume[template=\"scizor\"] section[id=\"education\"] field:not([name=\"content\"]):not([name=\"description\"]):not([name=\"recipient\"]):not([name=\"keywords\"])[role~=\"primary-text\"][name=\"title\"] {\n\tcolor: #000000;\n}\n\n/* Legacy Bold hosts keep the template bold weight; award titles remain the explicit unbold exception. */\n\n/* Education: Secondary text */\nsection[id=\"education\"] field[name=\"keywords\"] {\n\tcolor: #000000;\n}\n\n/* Education: Paragraph */\nsection[id=\"education\"] rich-text paragraph {\n\tcolor: #000000;\n}\n\n/* Education: List */\nsection[id=\"education\"] rich-text list {\n\tcolor: #000000;\n}\n\n/* Education: Link */\nsection[id=\"education\"] item > link,\nsection[id=\"education\"] item > template-part > link,\nsection[id=\"education\"] item-header > link,\nsection[id=\"education\"] item-header > template-part > link {\n\tcolor: #000000;\n}\n\n/* Education: Level indicator */\nsection[id=\"education\"] level {\n\tcolor: #000000;\n}\n"
+      }
+    }
+  }
+}
