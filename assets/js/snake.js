@@ -1,7 +1,10 @@
 // Easter egg: the footer contribution graph turns into Snake.
 // Trigger: click the graph, type "snake", or enter the Konami code.
 (() => {
-	const COLS = 53, ROWS = 7, CELL = 18, GAP = 4, STEP = CELL + GAP;
+	const ROWS = 7, CELL = 18, GAP = 4, STEP = CELL + GAP;
+	// Full year on wide screens; the last 20 weeks on phones so cells stay big enough to steer.
+	const colsFor = () => (wrap.clientWidth < 640 ? 20 : 53);
+	let COLS;
 	const canvas = document.getElementById('snake');
 	const wrap = document.getElementById('contrib');
 	const label = document.getElementById('snake-label');
@@ -11,20 +14,26 @@
 	const playText = document.getElementById('snake-play-text');
 	const ctx = canvas.getContext('2d');
 
-	const dpr = window.devicePixelRatio || 1;
-	canvas.width = (COLS * STEP - GAP) * dpr;
-	canvas.height = (ROWS * STEP - GAP) * dpr;
-	ctx.scale(dpr, dpr);
+	let grid, total;
+	function setup() {
+		COLS = colsFor();
+		const dpr = window.devicePixelRatio || 1;
+		canvas.width = (COLS * STEP - GAP) * dpr;
+		canvas.height = (ROWS * STEP - GAP) * dpr;
+		ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-	// Seeded PRNG so the "history" looks the same on every visit.
-	let seed = 17;
-	const rand = () => ((seed = (seed * 16807) % 2147483647) - 1) / 2147483646;
-	const grid = Array.from({ length: COLS * ROWS }, () => {
-		const r = rand();
-		return r < 0.45 ? 0 : r < 0.7 ? 1 : r < 0.85 ? 2 : r < 0.95 ? 3 : 4;
-	});
-	const total = grid.reduce((a, v) => a + v * 3, 0);
-	label.textContent = `${total.toLocaleString()} contributions in the last year`;
+		// Seeded PRNG so the "history" looks the same on every visit.
+		let seed = 17;
+		const rand = () => ((seed = (seed * 16807) % 2147483647) - 1) / 2147483646;
+		grid = Array.from({ length: COLS * ROWS }, () => {
+			const r = rand();
+			return r < 0.45 ? 0 : r < 0.7 ? 1 : r < 0.85 ? 2 : r < 0.95 ? 3 : 4;
+		});
+		total = grid.reduce((a, v) => a + v * 3, 0);
+		label.textContent = `${total.toLocaleString()} contributions in the ${COLS === 53 ? 'last year' : 'last 20 weeks'}`;
+		document.getElementById('snake-play-hint').textContent = COLS === 53 ? 'arrows / wasd / swipe' : 'tap play, then swipe to steer';
+	}
+	setup();
 
 	const color = (lvl) => getComputedStyle(document.documentElement).getPropertyValue(`--c${lvl}`).trim();
 	const idx = (x, y) => y * COLS + x;
@@ -66,7 +75,7 @@
 		over = false;
 		wrap.classList.add('playing');
 		label.textContent = 'snake — eat the commits';
-		hint.textContent = 'arrows / wasd / swipe · esc to quit';
+		hint.textContent = COLS === 53 ? 'arrows / wasd / swipe · esc to quit' : 'swipe on the grid to steer';
 		updateScore();
 		clearInterval(timer);
 		timer = setInterval(tick, 110);
@@ -89,7 +98,7 @@
 		} else {
 			snake = null;
 			playText.textContent = '▶ Play';
-			label.textContent = `${total.toLocaleString()} contributions in the last year`;
+			label.textContent = `${total.toLocaleString()} contributions in the ${COLS === 53 ? 'last year' : 'last 20 weeks'}`;
 		}
 		hint.textContent = 'less';
 		updateScore();
@@ -166,4 +175,11 @@
 
 	new MutationObserver(draw).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 	draw();
+	let resizeTimer;
+	window.addEventListener('resize', () => {
+		clearTimeout(resizeTimer);
+		resizeTimer = setTimeout(() => {
+			if (!playing && colsFor() !== COLS) { over = false; snake = null; setup(); draw(); }
+		}, 150);
+	});
 })();
