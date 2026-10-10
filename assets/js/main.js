@@ -35,5 +35,11 @@
 	}, { threshold: 0.12 });
 	document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
 
+	// Pause looping decorative animations while they are off screen.
+	const looping = new IntersectionObserver((entries) => {
+		for (const entry of entries) entry.target.classList.toggle('is-offscreen', !entry.isIntersecting);
+	});
+	document.querySelectorAll('.demo, .btn--glow, #contrib').forEach((el) => looping.observe(el));
+
 	document.getElementById('year').textContent = new Date().getFullYear();
 })();
