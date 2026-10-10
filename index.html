@@ -11,10 +11,14 @@
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="assets/css/main.css?v=4">
 	<script>
-		try { const t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+		let t = null;
+		try { t = localStorage.getItem('theme'); } catch (e) {}
+		if (!t && window.matchMedia('(prefers-color-scheme: light)').matches) t = 'light';
+		if (t) document.documentElement.dataset.theme = t;
 	</script>
 </head>
 <body>
+	<a class="skip-link" href="#main">Skip to content</a>
 	<header class="nav">
 		<div class="container nav__inner">
 			<a href="#top" class="nav__brand mono">~/ulrich<span class="caret">_</span></a>
@@ -40,7 +44,8 @@
 		</div>
 	</header>
 
-	<main id="top">
+	<main id="main">
+		<span id="top"></span>
 		<section class="hero">
 			<div class="container hero__inner">
 				<div class="hero__text reveal">
@@ -161,7 +166,7 @@ agents · rag · knowledge graphs · wasm</pre>
 							<h3>EdgeParse — PDF to structured data, in your browser</h3>
 							<p class="muted">Drop a PDF and the <a href="https://github.com/Arskan17/EdgeParse" target="_blank" rel="noopener">EdgeParse</a> engine, compiled to WASM, extracts Markdown, JSON (with bounding boxes), HTML or plain text. Nothing is uploaded: the file never leaves your machine.</p>
 						</div>
-						<span class="demo__status mono" id="ep-status">engine: idle</span>
+						<span class="demo__status mono" id="ep-status" role="status">engine: idle</span>
 					</div>
 					<div class="demo__body">
 						<label class="dropzone" id="ep-drop">
@@ -188,7 +193,7 @@ agents · rag · knowledge graphs · wasm</pre>
 						</div>
 						<div class="output">
 							<div class="output__bar mono">
-								<span id="ep-meta">output</span>
+								<span id="ep-meta" aria-live="polite">output</span>
 								<span>
 									<button class="link-btn" id="ep-copy" disabled>copy</button>
 									<button class="link-btn" id="ep-download" disabled>download</button>
@@ -240,10 +245,10 @@ agents · rag · knowledge graphs · wasm</pre>
 				<div class="contrib reveal" id="contrib">
 					<div class="contrib__bar mono">
 						<span id="snake-label">contributions in the last year</span>
-						<span id="snake-score"></span>
+						<span id="snake-score" aria-live="polite"></span>
 					</div>
 					<div class="contrib__stage">
-						<canvas id="snake" aria-label="Contribution graph snake game" role="img"></canvas>
+						<canvas id="snake" role="application" aria-label="Snake game on a contribution graph. Use arrow keys or WASD to steer, Escape to quit." aria-describedby="snake-label"></canvas>
 						<button class="snake-play" id="snake-play" type="button">
 							<span class="snake-play__btn" id="snake-play-text">▶ Play</span>
 							<span class="snake-play__hint mono">arrows / wasd / swipe</span>

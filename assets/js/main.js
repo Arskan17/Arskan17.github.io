@@ -13,11 +13,16 @@
 		const open = links.classList.toggle('open');
 		menu.setAttribute('aria-expanded', open);
 	});
-	links.addEventListener('click', (e) => {
-		if (e.target.tagName === 'A') {
-			links.classList.remove('open');
-			menu.setAttribute('aria-expanded', 'false');
-		}
+	const closeMenu = (refocus) => {
+		if (!links.classList.contains('open')) return;
+		links.classList.remove('open');
+		menu.setAttribute('aria-expanded', 'false');
+		if (refocus) menu.focus();
+	};
+	links.addEventListener('click', (e) => { if (e.target.tagName === 'A') closeMenu(false); });
+	document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMenu(true); });
+	document.addEventListener('click', (e) => {
+		if (!links.contains(e.target) && !menu.contains(e.target)) closeMenu(false);
 	});
 
 	const io = new IntersectionObserver((entries) => {
