@@ -120,7 +120,8 @@ h1, h2, h3 { line-height: 1.15; letter-spacing: -0.02em; margin: 0 0 .5em; }
 	border: 1px solid var(--border);
 	box-shadow: 0 30px 80px -20px var(--glow);
 }
-.portrait img { width: 100%; height: 100%; object-fit: cover; object-position: 53% 4%; }
+/* source is a full-body shot: zoom to head and shoulders */
+.portrait img { width: 190%; max-width: none; height: auto; margin-left: -50.7%; }
 .terminal {
 	position: absolute; left: -48px; bottom: -32px;
 	margin: 0; padding: 14px 18px;
