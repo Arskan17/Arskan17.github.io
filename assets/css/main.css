@@ -42,7 +42,6 @@ body {
 		linear-gradient(var(--border) 1px, transparent 1px),
 		linear-gradient(90deg, var(--border) 1px, transparent 1px);
 	background-size: 56px 56px;
-	background-attachment: fixed;
 	background-position: -1px -1px;
 }
 body::before {
@@ -368,3 +367,6 @@ h1, h2, h3 { line-height: 1.15; letter-spacing: -0.02em; margin: 0 0 .5em; }
 [data-theme="light"] .snake-play { background: color-mix(in srgb, var(--surface) 55%, transparent); }
 [data-theme="light"] .snake-play__btn { color: #fff; }
 [data-theme="light"] .timeline li::before { background: var(--surface); }
+
+@media (hover: hover) and (pointer: fine) { body { background-attachment: fixed; } }
+.is-offscreen, .is-offscreen *, .is-offscreen::before, .is-offscreen *::before { animation-play-state: paused !important; }

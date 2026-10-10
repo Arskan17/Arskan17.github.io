@@ -114,10 +114,11 @@ $('ep-download').addEventListener('click', () => {
 	URL.revokeObjectURL(a.href);
 });
 
-// Warm the engine when the demo scrolls into view.
-new IntersectionObserver((entries, obs) => {
-	if (entries.some((e) => e.isIntersecting)) {
-		obs.disconnect();
-		loadEngine().catch(() => setStatus('offline', 'err'));
-	}
-}, { rootMargin: '200px' }).observe($('edgeparse'));
+// Warm the engine on first intent (hover/focus), not on scroll, and never on Save-Data.
+const warm = () => {
+	if (navigator.connection && navigator.connection.saveData) return;
+	loadEngine().catch(() => setStatus('offline', 'err'));
+};
+card.addEventListener('pointerenter', warm, { once: true });
+card.addEventListener('focusin', warm, { once: true });
+setStatus('loads on first use');
