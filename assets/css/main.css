@@ -138,7 +138,7 @@ h1, h2, h3 { line-height: 1.15; letter-spacing: -0.02em; margin: 0 0 .5em; }
 /* sections */
 .section { padding: 88px 0; }
 .section__title { font-size: clamp(1.6rem, 3vw, 2.1rem); display: flex; align-items: baseline; gap: 12px; margin-bottom: 36px; }
-.section__title .mono { color: var(--accent); font-size: .6em; font-weight: 400; }
+.section__title .mono { color: var(--accent); font-size: max(.75em, 13px); font-weight: 500; }
 .card {
 	background: var(--surface);
 	border: 1px solid var(--border);
