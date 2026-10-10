@@ -180,10 +180,19 @@ foss · p2p web · wasm · photography</pre>
 	<footer class="footer">
 		<div class="container">
 			<!-- footer-extras -->
+			<div class="contrib" id="contrib">
+				<div class="contrib__bar mono">
+					<span id="snake-label">contributions in the last year</span>
+					<span id="snake-score"></span>
+				</div>
+				<canvas id="snake" aria-label="Contribution graph" role="img"></canvas>
+				<div class="contrib__legend mono"><span id="snake-hint">less</span><i class="l0"></i><i class="l1"></i><i class="l2"></i><i class="l3"></i><i class="l4"></i><span>more</span></div>
+			</div>
 			<p class="mono muted">© <span id="year"></span> Arsène Ulrich Mugneghe Kankeu · built by hand, no frameworks</p>
 		</div>
 	</footer>
 
 	<script src="assets/js/main.js" defer></script>
+	<script src="assets/js/snake.js" defer></script>
 </body>
 </html>
