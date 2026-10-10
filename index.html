@@ -9,7 +9,7 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="assets/css/main.css">
+	<link rel="stylesheet" href="assets/css/main.css?v=2">
 	<script>
 		try { const t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
 	</script>
@@ -47,7 +47,7 @@
 					<h1>Arsène Ulrich<br><span class="grad">Mugneghe Kankeu</span></h1>
 					<p class="lead">Computer Science student at RPTU Kaiserslautern, specialising in software engineering. I contribute to open source, solve problems for fun, and ship things that run in the browser.</p>
 					<div class="hero__cta">
-						<a class="btn btn--primary" href="#projects">See my work</a>
+						<a class="btn btn--primary" href="#work">See my work</a>
 						<a class="btn btn--ghost" href="https://github.com/Arskan17" target="_blank" rel="noopener">GitHub ↗</a>
 						<a class="btn btn--glow" href="#edgeparse">Try EdgeParse ↓</a>
 					</div>
@@ -151,8 +151,14 @@ foss · p2p web · wasm · photography</pre>
 							<input type="file" id="ep-file" accept="application/pdf,.pdf" hidden>
 							<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M12 18v-6M9 15l3-3 3 3"/></svg>
 							<span><strong>Drop a PDF</strong> or click to choose</span>
-							<span class="mono muted" id="ep-filename">max ~50 MB · processed on-device</span>
+							<span class="mono muted">max ~50 MB · processed on-device</span>
 						</label>
+						<div class="loaded" id="ep-loaded">
+							<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/></svg>
+							<span class="mono loaded__name" id="ep-filename"></span>
+							<button class="btn btn--ghost btn--sm" id="ep-another" type="button">Try another file</button>
+							<button class="link-btn" id="ep-clear" type="button">clear</button>
+						</div>
 						<div class="demo__controls">
 							<div class="seg" role="radiogroup" aria-label="Output format">
 								<label><input type="radio" name="ep-format" value="markdown" checked><span>Markdown</span></label>
@@ -175,7 +181,7 @@ foss · p2p web · wasm · photography</pre>
 						</div>
 					</div>
 				</article>
-				<div class="grid">
+				<div class="grid" id="work">
 					<a class="card project reveal" href="https://github.com/Arskan17/agregore-browser" target="_blank" rel="noopener">
 						<span class="tag mono">Electron · P2P</span><h3>Agregore Browser</h3><p>Browser for the decentralized web — IPFS, Hyper, Gemini.</p>
 					</a>
@@ -245,8 +251,8 @@ foss · p2p web · wasm · photography</pre>
 		</div>
 	</footer>
 
-	<script src="assets/js/main.js" defer></script>
-	<script type="module" src="assets/js/edgeparse-demo.js"></script>
-	<script src="assets/js/snake.js" defer></script>
+	<script src="assets/js/main.js?v=2" defer></script>
+	<script type="module" src="assets/js/edgeparse-demo.js?v=2"></script>
+	<script src="assets/js/snake.js?v=2" defer></script>
 </body>
 </html>

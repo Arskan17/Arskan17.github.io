@@ -8,6 +8,8 @@ const output = $('ep-output');
 const meta = $('ep-meta');
 const drop = $('ep-drop');
 const fileInput = $('ep-file');
+const loaded = $('ep-loaded');
+const card = $('edgeparse');
 
 let engine = null;
 let currentFile = null;
@@ -67,14 +69,31 @@ function pick(file) {
 	}
 	currentFile = file;
 	drop.classList.add('has-file');
+	card.classList.add('is-active');
 	$('ep-filename').textContent = `${file.name} · ${(file.size / 1024).toFixed(0)} KB`;
 	run();
 }
 
-fileInput.addEventListener('change', () => pick(fileInput.files[0]));
-['dragenter', 'dragover'].forEach((t) => drop.addEventListener(t, (e) => { e.preventDefault(); drop.classList.add('over'); }));
-['dragleave', 'drop'].forEach((t) => drop.addEventListener(t, (e) => { e.preventDefault(); drop.classList.remove('over'); }));
-drop.addEventListener('drop', (e) => pick(e.dataTransfer.files[0]));
+fileInput.addEventListener('change', () => {
+	pick(fileInput.files[0]);
+	fileInput.value = ''; // allow re-picking the same file
+});
+for (const zone of [drop, loaded]) {
+	['dragenter', 'dragover'].forEach((t) => zone.addEventListener(t, (e) => { e.preventDefault(); zone.classList.add('over'); }));
+	['dragleave', 'drop'].forEach((t) => zone.addEventListener(t, (e) => { e.preventDefault(); zone.classList.remove('over'); }));
+	zone.addEventListener('drop', (e) => pick(e.dataTransfer.files[0]));
+}
+
+$('ep-another').addEventListener('click', () => fileInput.click());
+$('ep-clear').addEventListener('click', () => {
+	currentFile = null;
+	result = '';
+	drop.classList.remove('has-file');
+	card.classList.remove('is-active');
+	output.textContent = '// Your extracted document will appear here.';
+	meta.textContent = 'output';
+	$('ep-copy').disabled = $('ep-download').disabled = true;
+});
 
 document.querySelectorAll('input[name="ep-format"]').forEach((r) => r.addEventListener('change', run));
 $('ep-cluster').addEventListener('change', run);
