@@ -52,7 +52,7 @@
 				</div>
 				<div class="hero__portrait reveal">
 					<div class="portrait">
-						<img src="Images1/Me.jpeg" alt="Portrait of Arsène Kankeu" width="320" height="320">
+						<img src="Images1/Me.jpeg" alt="Portrait of Arsène Kankeu" width="320" height="400">
 					</div>
 					<pre class="terminal mono" aria-hidden="true"><span class="t-dim">$</span> whoami
 arsene — cs @ rptu
@@ -135,6 +135,44 @@ foss · p2p web · wasm · photography</pre>
 			<div class="container">
 				<h2 class="section__title reveal"><span class="mono">04.</span> Projects</h2>
 				<!-- project-demos -->
+				<article class="card demo reveal" id="edgeparse">
+					<div class="demo__head">
+						<div>
+							<span class="tag mono">Rust → WebAssembly · runs locally</span>
+							<h3>EdgeParse — PDF to structured data, in your browser</h3>
+							<p class="muted">Drop a PDF and the <a href="https://github.com/Arskan17/EdgeParse" target="_blank" rel="noopener">EdgeParse</a> engine, compiled to WASM, extracts Markdown, JSON (with bounding boxes), HTML or plain text. Nothing is uploaded: the file never leaves your machine.</p>
+						</div>
+						<span class="demo__status mono" id="ep-status">engine: idle</span>
+					</div>
+					<div class="demo__body">
+						<label class="dropzone" id="ep-drop">
+							<input type="file" id="ep-file" accept="application/pdf,.pdf" hidden>
+							<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M12 18v-6M9 15l3-3 3 3"/></svg>
+							<span><strong>Drop a PDF</strong> or click to choose</span>
+							<span class="mono muted" id="ep-filename">max ~50 MB · processed on-device</span>
+						</label>
+						<div class="demo__controls">
+							<div class="seg" role="radiogroup" aria-label="Output format">
+								<label><input type="radio" name="ep-format" value="markdown" checked><span>Markdown</span></label>
+								<label><input type="radio" name="ep-format" value="json"><span>JSON</span></label>
+								<label><input type="radio" name="ep-format" value="html"><span>HTML</span></label>
+								<label><input type="radio" name="ep-format" value="text"><span>Text</span></label>
+							</div>
+							<input class="input mono" id="ep-pages" placeholder="pages: all  (e.g. 1-3,5)" aria-label="Page range">
+							<label class="check"><input type="checkbox" id="ep-cluster"> borderless tables</label>
+						</div>
+						<div class="output">
+							<div class="output__bar mono">
+								<span id="ep-meta">output</span>
+								<span>
+									<button class="link-btn" id="ep-copy" disabled>copy</button>
+									<button class="link-btn" id="ep-download" disabled>download</button>
+								</span>
+							</div>
+							<pre class="mono" id="ep-output">// Your extracted document will appear here.</pre>
+						</div>
+					</div>
+				</article>
 				<div class="grid">
 					<a class="card project reveal" href="https://github.com/Arskan17/agregore-browser" target="_blank" rel="noopener">
 						<span class="tag mono">Electron · P2P</span><h3>Agregore Browser</h3><p>Browser for the decentralized web — IPFS, Hyper, Gemini.</p>
@@ -185,5 +223,6 @@ foss · p2p web · wasm · photography</pre>
 	</footer>
 
 	<script src="assets/js/main.js" defer></script>
+	<script type="module" src="assets/js/edgeparse-demo.js"></script>
 </body>
 </html>
