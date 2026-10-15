@@ -384,3 +384,13 @@ h1, h2, h3 { line-height: 1.15; letter-spacing: -0.02em; margin: 0 0 .5em; }
 .skip-link:focus { top: 12px; text-decoration: none; }
 ::selection { background: color-mix(in srgb, var(--accent) 35%, transparent); }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+/* OCR gate inside the EdgeParse output pane */
+.ocr-gate {
+	display: grid; justify-items: start; gap: 12px;
+	padding: 18px 16px; border-bottom: 1px solid var(--border);
+	background: color-mix(in srgb, var(--accent) 7%, var(--surface));
+}
+.ocr-gate[hidden] { display: none; }
+.ocr-gate p { margin: 0; color: var(--text); font-size: 14px; max-width: 62ch; }
+.ocr-gate progress { width: min(100%, 320px); height: 8px; accent-color: var(--accent); }

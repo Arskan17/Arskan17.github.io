@@ -19,7 +19,7 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="assets/css/main.css?v=5">
+	<link rel="stylesheet" href="assets/css/main.css?v=6">
 	<script>
 		let t = null;
 		try { t = localStorage.getItem('theme'); } catch (e) {}
@@ -174,15 +174,15 @@ agents · rag · knowledge graphs · wasm</pre>
 						<div>
 							<span class="tag mono">Rust → WebAssembly · runs locally</span> <span class="live mono"><i></i>LIVE · try it</span>
 							<h3>EdgeParse — PDF to structured data, in your browser</h3>
-							<p class="muted">Drop a PDF and the <a href="https://github.com/Arskan17/EdgeParse" target="_blank" rel="noopener">EdgeParse</a> engine, compiled to WASM, extracts Markdown, JSON (with bounding boxes), HTML or plain text. Nothing is uploaded: the file never leaves your machine.</p>
+							<p class="muted">Drop a PDF and the <a href="https://github.com/Arskan17/EdgeParse" target="_blank" rel="noopener">EdgeParse</a> engine, compiled to WASM, extracts Markdown, JSON (with bounding boxes), HTML or plain text. Photos and scanned pages go through an OCR engine (ocrs, also Rust → WASM). Nothing is uploaded: the file never leaves your machine.</p>
 						</div>
 						<span class="demo__status mono" id="ep-status" role="status">engine: idle</span>
 					</div>
 					<div class="demo__body">
 						<label class="dropzone" id="ep-drop">
-							<input type="file" id="ep-file" accept="application/pdf,.pdf" hidden>
+							<input type="file" id="ep-file" accept="application/pdf,.pdf,image/*" hidden>
 							<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M12 18v-6M9 15l3-3 3 3"/></svg>
-							<span><strong>Drop a PDF</strong> or click to choose</span>
+							<span><strong>Drop a PDF or image</strong> or click to choose</span>
 							<span class="mono muted">max ~50 MB · processed on-device</span>
 						</label>
 						<div class="loaded" id="ep-loaded">
@@ -208,6 +208,11 @@ agents · rag · knowledge graphs · wasm</pre>
 									<button class="link-btn" id="ep-copy" disabled>copy</button>
 									<button class="link-btn" id="ep-download" disabled>download</button>
 								</span>
+							</div>
+							<div class="ocr-gate" id="ep-gate" hidden>
+								<p id="ep-gate-text"></p>
+								<button class="btn btn--primary btn--sm" id="ep-gate-btn" type="button">Load OCR engine &amp; run · 16.5 MB</button>
+								<progress id="ep-progress" max="100" value="0" hidden aria-label="OCR engine download"></progress>
 							</div>
 							<pre class="mono" id="ep-output">// Your extracted document will appear here.</pre>
 						</div>
@@ -289,8 +294,8 @@ agents · rag · knowledge graphs · wasm</pre>
 		</div>
 	</footer>
 
-	<script src="assets/js/main.js?v=5" defer></script>
-	<script type="module" src="assets/js/edgeparse-demo.js?v=5"></script>
-	<script src="assets/js/snake.js?v=5" defer></script>
+	<script src="assets/js/main.js?v=6" defer></script>
+	<script type="module" src="assets/js/edgeparse-demo.js?v=6"></script>
+	<script src="assets/js/snake.js?v=6" defer></script>
 </body>
 </html>
