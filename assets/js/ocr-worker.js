@@ -78,13 +78,14 @@ async function init() {
 	const files = await download((n) => {
 		loadedBytes += n;
 		const pct = Math.min(99, Math.floor((loadedBytes / TOTAL) * 100));
-		if (pct !== lastPct) { lastPct = pct; postMessage({ type: 'progress', pct }); }
+		if (pct !== lastPct) { lastPct = pct; postMessage({ type: 'progress', pct, loaded: loadedBytes, total: TOTAL }); }
 	});
+	postMessage({ type: 'stage', text: 'Starting the engine and loading the models…' });
 	const { instance } = await WebAssembly.instantiate(files.wasm, { wasi_snapshot_preview1: wasi() });
 	ex = instance.exports;
 	const rc = ex.ocr_init(put(files.det), files.det.length, put(files.rec), files.rec.length);
 	if (rc !== 0) throw new Error(readPrefixed(ex.last_error()));
-	postMessage({ type: 'progress', pct: 100 });
+	postMessage({ type: 'progress', pct: 100, loaded: TOTAL, total: TOTAL });
 }
 
 onmessage = async ({ data }) => {

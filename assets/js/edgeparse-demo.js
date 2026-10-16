@@ -4,6 +4,9 @@ const ENGINE_URL = 'https://cdn.jsdelivr.net/npm/edgeparse-wasm@0.2.5/edgeparse_
 const PDFJS_URL = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.min.mjs';
 const PDFJS_WORKER_URL = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.worker.min.mjs';
 const EXT = { markdown: 'md', json: 'json', html: 'html', text: 'txt' };
+const MIME = { markdown: 'text/markdown', json: 'application/json', html: 'text/html', text: 'text/plain' };
+const MAX_BYTES = 50 * 1024 * 1024;
+const OCR_REF = 'ocrs @2011ca7';
 const IMAGE_RE = /\.(png|jpe?g|webp|bmp|tiff?|gif)$/i;
 const MAX_OCR_PAGES = 10;
 
@@ -19,6 +22,22 @@ const gate = $('ep-gate');
 const gateText = $('ep-gate-text');
 const gateBtn = $('ep-gate-btn');
 const progress = $('ep-progress');
+const gateNote = $('ep-gate-note');
+const gateCancel = $('ep-gate-cancel');
+
+const mb = (n) => (n / 1048576).toFixed(1);
+const fmtSize = (n) => (n >= 1048576 ? `${mb(n)} MB` : `${Math.max(1, Math.round(n / 1024))} KB`);
+// Phrase failures for people; the raw error goes to the console.
+function friendly(err) {
+	const m = String((err && err.message) || err);
+	if (/download failed|fetch|network|load failed/i.test(m)) return "Couldn't reach the model CDN. Check your connection and try again.";
+	if (/memory|unreachable|out of bounds/i.test(m)) return 'The engine ran out of memory on this file. Try a smaller image or fewer pages.';
+	return "The OCR engine couldn't read this file.";
+}
+const onMeteredData = () => {
+	const c = navigator.connection;
+	return !!c && (c.saveData || (c.effectiveType && c.effectiveType !== '4g'));
+};
 
 let engine = null;
 let currentFile = null;
@@ -58,8 +77,14 @@ function startOcr() {
 	ocrInit = new Promise((resolve, reject) => {
 		worker.onmessage = ({ data }) => {
 			if (data.type === 'progress') {
+				const text = `${mb(data.loaded)} / ${mb(data.total)} MB`;
 				progress.value = data.pct;
-				setStatus(`ocr: loading ${data.pct}%`);
+				progress.setAttribute('aria-valuetext', text);
+				gateText.textContent = `Downloading the OCR engine · ${text}`;
+				if (data.pct % 25 === 0) setStatus(`ocr: loading ${data.pct}%`);
+			} else if (data.type === 'stage') {
+				gateText.textContent = data.text;
+				setStatus('ocr: starting');
 			} else if (data.type === 'ready') {
 				ocrReady = true;
 				setStatus('ocr: ready', 'ok');
@@ -86,6 +111,19 @@ function ocrImage(bytes) {
 		jobs.set(id, { resolve, reject });
 		worker.postMessage({ type: 'ocr', id, bytes }, [bytes.buffer]);
 	});
+}
+
+// Stopping the worker is the only way to abort a fetch or an inference in flight.
+function cancelOcr() {
+	worker?.terminate();
+	worker = null;
+	ocrInit = null;
+	ocrReady = false;
+	jobs.clear();
+	runToken++;
+	ocrBusy = false;
+	setStatus('ocr: cancelled');
+	showGate(`${currentFile.name} · OCR cancelled`);
 }
 
 // Page range like "1-3,5" → sorted 1-based page numbers within [1, total].
@@ -127,10 +165,13 @@ async function runOcr() {
 	const token = runToken;
 	const file = currentFile;
 	gate.hidden = false;
+	output.hidden = true;
 	gateBtn.hidden = true;
-	progress.hidden = false;
+	gateNote.hidden = true;
+	gateCancel.hidden = false;
+	progress.hidden = ocrReady;
 	try {
-		gateText.textContent = 'Loading the OCR engine…';
+		if (!ocrReady) gateText.textContent = 'Downloading the OCR engine…';
 		await startOcr();
 		progress.hidden = true;
 		let inputs, skipped = 0;
@@ -152,15 +193,17 @@ async function runOcr() {
 		ocrPages = { pages, skipped, ms: Math.round(performance.now() - t0) };
 		setStatus('ocr: ready', 'ok');
 		gate.hidden = true;
+		gateCancel.hidden = true;
 		render();
 	} catch (err) {
 		if (token !== runToken) return;
 		console.error(err);
 		setStatus('ocr: error', 'err');
 		progress.hidden = true;
+		gateCancel.hidden = true;
 		gateBtn.hidden = false;
-		gateBtn.textContent = 'Retry OCR';
-		gateText.textContent = `OCR failed: ${err.message || err}`;
+		gateBtn.textContent = 'Try OCR again';
+		gateText.textContent = friendly(err);
 	} finally {
 		if (token === runToken) ocrBusy = false;
 	}
@@ -186,8 +229,9 @@ function formatOcr(fmt, { pages }) {
 
 function show(text, info) {
 	result = text;
+	output.hidden = false;
 	output.textContent = text || '// (no text found)';
-	meta.textContent = info;
+	meta.textContent = `${info} · 0 bytes uploaded`;
 	$('ep-copy').disabled = $('ep-download').disabled = !text;
 }
 
@@ -195,22 +239,23 @@ function render() {
 	const fmt = format();
 	const { pages, skipped, ms } = ocrPages;
 	const lines = pages.reduce((a, p) => a + p.lines.length, 0);
-	show(formatOcr(fmt, ocrPages), `${currentFile.name} → ${fmt} via OCR · ${pages.length} page${pages.length > 1 ? 's' : ''} · ${lines} lines · ${ms} ms${skipped ? ` · first ${MAX_OCR_PAGES} pages only` : ''}`);
+	show(formatOcr(fmt, ocrPages), `${currentFile.name} → ${fmt} via OCR · ${pages.length} page${pages.length > 1 ? 's' : ''} · ${lines} lines · ${ms} ms · ${OCR_REF}${skipped ? ` · first ${MAX_OCR_PAGES} pages only` : ''}`);
 }
 
 function showGate(reason) {
 	result = '';
 	$('ep-copy').disabled = $('ep-download').disabled = true;
-	output.textContent = '';
 	meta.textContent = reason;
+	if (ocrReady) return runOcr(); // engine already here: no need to ask again
+	output.hidden = true;
 	gate.hidden = false;
 	progress.hidden = true;
+	gateCancel.hidden = true;
 	gateBtn.hidden = false;
-	gateBtn.textContent = ocrReady ? 'Run OCR' : 'Load OCR engine & run · 16.5 MB';
-	gateText.textContent = ocrReady
-		? 'The OCR engine is loaded. Run it on this file?'
-		: 'This needs OCR. The ocrs engine (Rust → WASM) and its models are a one-time 16.5 MB download, and everything runs on your device.';
-	if (ocrReady) runOcr();
+	gateBtn.textContent = 'Load OCR engine & run · 16.5 MB';
+	gateText.textContent = 'Reading this takes OCR: a small neural network (ocrs, Rust → WASM) that runs on your device. It is a 16.5 MB download, cached by your browser afterwards.';
+	gateNote.hidden = !onMeteredData();
+	gateNote.textContent = 'You seem to be on a slow or metered connection; the download may take a while.';
 }
 
 function format() {
@@ -221,6 +266,7 @@ async function run() {
 	if (!currentFile || ocrBusy) return;
 	const token = ++runToken;
 	gate.hidden = true;
+	output.hidden = false;
 	if (ocrPages) return render();
 	if (kind === 'image') return showGate(`${currentFile.name} is an image`);
 
@@ -235,7 +281,9 @@ async function run() {
 		let text = ep.convert_to_string(bytes, fmt, pages, null, tables);
 		const ms = Math.round(performance.now() - t0);
 		if (token !== runToken) return;
-		const plain = fmt === 'text' ? text : ep.convert_to_string(bytes, 'text', pages, null, tables);
+		// Only JSON wraps empty pages in structure; the other formats are empty when there's no text layer.
+		const plain = fmt === 'json' ? ep.convert_to_string(bytes, 'text', pages, null, tables)
+			: fmt === 'html' ? text.replace(/<[^>]*>/g, '') : text;
 		if (!plain.trim()) return showGate(`${currentFile.name}: no text layer found (scanned?)`);
 		if (fmt === 'json') {
 			try { text = JSON.stringify(JSON.parse(text), null, 2); } catch (e) {}
@@ -245,7 +293,7 @@ async function run() {
 		console.error(err);
 		setStatus('engine: error', 'err');
 		show('', 'parse failed');
-		output.textContent = `// failed: ${err && err.message ? err.message : err}`;
+		output.textContent = "// EdgeParse couldn't read this PDF. It may be encrypted or damaged.";
 	}
 }
 
@@ -254,7 +302,11 @@ function pick(file) {
 	const isPdf = /\.pdf$/i.test(file.name) || file.type === 'application/pdf';
 	const isImage = IMAGE_RE.test(file.name) || file.type.startsWith('image/');
 	if (!isPdf && !isImage) {
-		output.textContent = '// please choose a PDF or an image (PNG, JPG, WebP, BMP, TIFF, GIF)';
+		meta.textContent = `${file.name}: not a PDF or image (PNG, JPG, WebP, BMP, TIFF, GIF)`;
+		return;
+	}
+	if (file.size > MAX_BYTES) {
+		meta.textContent = `${file.name} is ${fmtSize(file.size)}; the limit is 50 MB`;
 		return;
 	}
 	runToken++; // abandon any parse/OCR still running for the previous file
@@ -264,7 +316,9 @@ function pick(file) {
 	ocrPages = null;
 	drop.classList.add('has-file');
 	card.classList.add('is-active');
-	$('ep-filename').textContent = `${file.name} · ${(file.size / 1024).toFixed(0)} KB`;
+	$('ep-filename').textContent = `${file.name} · ${fmtSize(file.size)}`;
+	// Page range and table detection only mean something for PDFs.
+	$('ep-pages').disabled = $('ep-cluster').disabled = kind === 'image';
 	run();
 }
 
@@ -279,6 +333,18 @@ for (const zone of [drop, loaded]) {
 }
 
 gateBtn.addEventListener('click', runOcr);
+gateCancel.addEventListener('click', cancelOcr);
+document.querySelectorAll('[data-sample]').forEach((btn) => btn.addEventListener('click', async () => {
+	const url = btn.dataset.sample;
+	try {
+		const res = await fetch(url);
+		if (!res.ok) throw new Error(res.status);
+		const blob = await res.blob();
+		pick(new File([blob], url.split('/').pop(), { type: blob.type }));
+	} catch (e) {
+		meta.textContent = "Couldn't load the sample file";
+	}
+}));
 $('ep-another').addEventListener('click', () => fileInput.click());
 $('ep-clear').addEventListener('click', () => {
 	runToken++;
@@ -287,6 +353,8 @@ $('ep-clear').addEventListener('click', () => {
 	ocrPages = null;
 	result = '';
 	gate.hidden = true;
+	output.hidden = false;
+	$('ep-pages').disabled = $('ep-cluster').disabled = false;
 	drop.classList.remove('has-file');
 	card.classList.remove('is-active');
 	output.textContent = '// Your extracted document will appear here.';
@@ -299,13 +367,13 @@ $('ep-cluster').addEventListener('change', () => { if (kind === 'pdf' && !ocrPag
 $('ep-pages').addEventListener('change', () => { if (ocrBusy) return; ocrPages = null; run(); });
 
 $('ep-copy').addEventListener('click', async () => {
-	try { await navigator.clipboard.writeText(result); $('ep-copy').textContent = 'copied'; }
+	try { await navigator.clipboard.writeText(result); $('ep-copy').textContent = 'copied'; meta.textContent = 'copied to clipboard'; }
 	catch (e) { $('ep-copy').textContent = 'failed'; }
 	setTimeout(() => { $('ep-copy').textContent = 'copy'; }, 1500);
 });
 
 $('ep-download').addEventListener('click', () => {
-	const blob = new Blob([result], { type: 'text/plain' });
+	const blob = new Blob([result], { type: MIME[format()] });
 	const a = document.createElement('a');
 	a.href = URL.createObjectURL(blob);
 	a.download = `${currentFile.name.replace(/\.[^.]+$/, '')}.${EXT[format()]}`;
