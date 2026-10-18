@@ -42,6 +42,29 @@
 	let best = 0;
 	try { best = Number(localStorage.getItem('snake-best')) || 0; } catch (e) {}
 
+	// Sounds are short sine-wave note sequences: [frequency Hz, duration s] pairs.
+	let audio = null;
+	function play(notes) {
+		if (!audio) return;
+		let t = audio.currentTime;
+		for (const [freq, dur] of notes) {
+			const osc = audio.createOscillator(), gain = audio.createGain();
+			osc.frequency.value = freq;
+			gain.gain.setValueAtTime(0.15, t);
+			gain.gain.exponentialRampToValueAtTime(0.001, t + dur);
+			osc.connect(gain).connect(audio.destination);
+			osc.start(t);
+			osc.stop(t + dur);
+			t += dur;
+		}
+	}
+	const SOUND = {
+		eat: [[880, 0.06]],
+		over: [[392, 0.15], [330, 0.15], [262, 0.35]],
+		win: [[523, 0.12], [659, 0.12], [784, 0.12], [1047, 0.4]],
+	};
+	let resetTimer = null;
+
 	function cellRect(x, y, fill) {
 		ctx.fillStyle = fill;
 		ctx.beginPath();
@@ -66,6 +89,9 @@
 	}
 
 	function start() {
+		// Browsers only allow audio after a user gesture, and start() always runs from one.
+		try { audio ??= new AudioContext(); audio.resume(); } catch (e) {}
+		clearTimeout(resetTimer);
 		cells = grid.slice();
 		snake = [[5, 3], [4, 3], [3, 3]];
 		snake.forEach(([x, y]) => (cells[idx(x, y)] = 0));
@@ -115,12 +141,19 @@
 		const head = [(hx + dir[0] + COLS) % COLS, (hy + dir[1] + ROWS) % ROWS];
 		const lvl = cells[idx(...head)];
 		const body = lvl ? snake : snake.slice(0, -1);
-		if (body.some(([x, y]) => x === head[0] && y === head[1])) return stop(true);
+		if (body.some(([x, y]) => x === head[0] && y === head[1])) { play(SOUND.over); return stop(true); }
 		snake.unshift(head);
 		if (lvl) {
 			score += lvl * 3;
 			cells[idx(...head)] = 0;
-			if (cells.every((v) => v === 0)) return stop(true);
+			if (cells.every((v) => v === 0)) {
+				play(SOUND.win);
+				stop(true);
+				label.textContent = `board cleared — ${score} contributions!`;
+				resetTimer = setTimeout(() => stop(false), 3000);
+				return;
+			}
+			play(SOUND.eat);
 		} else {
 			snake.pop();
 		}
