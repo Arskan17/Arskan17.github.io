@@ -43,9 +43,22 @@
 	try { best = Number(localStorage.getItem('snake-best')) || 0; } catch (e) {}
 
 	// Sounds are short sine-wave note sequences: [frequency Hz, duration s] pairs.
-	let audio = null;
+	let audio = null, muted = false;
+	try { muted = localStorage.getItem('snake-muted') === '1'; } catch (e) {}
+	const muteBtn = document.getElementById('snake-mute');
+	const showMute = () => {
+		muteBtn.textContent = muted ? '🔇' : '🔊';
+		muteBtn.setAttribute('aria-pressed', muted);
+	};
+	showMute();
+	muteBtn.addEventListener('click', () => {
+		muted = !muted;
+		try { localStorage.setItem('snake-muted', muted ? '1' : '0'); } catch (e) {}
+		showMute();
+		if (playing) canvas.focus({ preventScroll: true });
+	});
 	function play(notes) {
-		if (!audio) return;
+		if (!audio || muted) return;
 		let t = audio.currentTime;
 		for (const [freq, dur] of notes) {
 			const osc = audio.createOscillator(), gain = audio.createGain();

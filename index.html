@@ -19,7 +19,7 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="assets/css/main.css?v=8">
+	<link rel="stylesheet" href="assets/css/main.css?v=10">
 	<script>
 		let t = null;
 		try { t = localStorage.getItem('theme'); } catch (e) {}
@@ -268,7 +268,7 @@ agents · rag · knowledge graphs · wasm</pre>
 				<div class="contrib reveal" id="contrib">
 					<div class="contrib__bar mono">
 						<span id="snake-label">contributions in the last year</span>
-						<span id="snake-score" aria-live="polite"></span>
+						<span><span id="snake-score" aria-live="polite"></span><button class="snake-mute" id="snake-mute" type="button" aria-pressed="false" aria-label="Mute sounds">🔊</button></span>
 					</div>
 					<div class="contrib__stage">
 						<canvas id="snake" role="application" aria-label="Snake game on a contribution graph. Use arrow keys or WASD to steer, Escape to quit." aria-describedby="snake-label"></canvas>
@@ -304,6 +304,6 @@ agents · rag · knowledge graphs · wasm</pre>
 
 	<script src="assets/js/main.js?v=8" defer></script>
 	<script type="module" src="assets/js/edgeparse-demo.js?v=8"></script>
-	<script src="assets/js/snake.js?v=9" defer></script>
+	<script src="assets/js/snake.js?v=10" defer></script>
 </body>
 </html>
