@@ -329,6 +329,8 @@ h1, h2, h3 { line-height: 1.15; letter-spacing: -0.02em; margin: 0 0 .5em; }
 [data-theme="light"] { --c0: #ebedf0; --c1: #9be9a8; --c2: #40c463; --c3: #30a14e; --c4: #216e39; }
 .contrib { text-align: left; }
 .contrib__stage { position: relative; }
+.snake-mute { margin-left: 8px; padding: 0 2px; border: 0; background: none; color: inherit; font-size: 12px; cursor: pointer; }
+.snake-mute:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
 .contrib__bar { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); margin-bottom: 8px; }
 #snake { display: block; width: 100%; height: auto; cursor: pointer; touch-action: none; border-radius: 6px; }
 #snake:focus { outline: none; }
